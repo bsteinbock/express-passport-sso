@@ -11,7 +11,7 @@ passport.use(
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       callbackURL: GOOGLE_CALLBACK_URL,
-      passReqToCallback: true,
+      // passReqToCallback: true,
     },
     async (req, accessToken, refreshToken, profile, cb) => {
       const defaultUser = {
@@ -35,7 +35,7 @@ passport.use(
 );
 
 passport.serializeUser((user, cb) => {
-  console.log('Serializing user:', user);
+  console.log('Serializing google user:', user);
   cb(null, user.id);
 });
 

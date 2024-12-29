@@ -1,4 +1,5 @@
 import express from 'express';
+import expressSession from 'express-session';
 import morgan from 'morgan';
 import helmet from 'helmet';
 import cors from 'cors';
@@ -21,13 +22,14 @@ app.use(bodyParser.json());
 
 app.use(morgan('dev'));
 app.use(helmet());
-app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
+app.use(cors({ origin: 'http://localhost:3001', credentials: true }));
 app.use(express.json());
 
 app.use(
-  cookieSession({
-    maxAge: 24 * 60 * 60 * 1000,
-    keys: [process.env.COOKIE_KEY],
+  expressSession({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true,
   })
 );
 
